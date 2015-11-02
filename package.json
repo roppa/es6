@@ -1,0 +1,28 @@
+{
+  "name": "es6",
+  "version": "1.0.0",
+  "description": "Demonstrating some ECMA Script 6 (es6) features",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "jshint index.js",
+    "watch-test": "npm run lint & mocha -w",
+    "dev": "npm run watch-test & nodemon --harmony --use_strict --watch index.js"
+  },
+  "keywords": [
+    "es6"
+  ],
+  "author": "Mark Robson <mark.o.robson@gmail.com> (http://digioli.co.uk)",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "should": "^7.1.1",
+    "jshint": "^2.8.0",
+    "nodemon": "^1.8.0"
+  },
+  "dependencies": {
+  }
+}
