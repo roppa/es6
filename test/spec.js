@@ -95,11 +95,29 @@ describe("arrows", function () {
       done();
     });
 
-    it('should have successfully passed function arguments in', function(done) {
+    it("should have successfully passed function arguments in", function(done) {
       app.arrows.delay(callback, 100, 1, 2);
       clock.tick(100);
       callback.calledWith(1, 2).should.be.ok();
       done();
+    });
+
+    it("should keep reference to object when called as a method", function (done) {
+      var result;
+      var Car = function (make) {
+        this.make = make;
+      };
+      var ford = new Car("Ford");
+
+      Car.prototype.getMake = function () {
+        return this.make;
+      };
+
+      app.arrows.delay(() => result = ford.getMake(), 100);
+      clock.tick(100);
+      result.should.eql("Ford");
+      done();
+
     });
 
   });

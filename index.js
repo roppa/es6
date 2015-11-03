@@ -79,7 +79,8 @@ es6.arrows.reduce = function () {
 };
 
 /**
- * Delay calling a function. 
+ * Delay calling a function. Arrow functions do not have their own "this", instead it is inherited from the surrounding scope.
+ * Remember, the main things the parameter "this" refer to is global context, function context (global), method i.e. this refers to the thing to the left of the dot, call, apply, and also bind.
  * @param  {function} func is the function to execute. Pass in any parameters after wait.
  * @param  {number} wait in miliseconds i.e. 1000 is approx a second
  */
@@ -87,9 +88,6 @@ es6.arrows.delay = function (func, wait) {
   var args = Array.prototype.slice.call(arguments, 2, arguments.length);
   setTimeout(() => func.apply(func, args), wait);
 };
-
-
-
 
 ///////////////////////////////////////////////////////////////
 // Exports
