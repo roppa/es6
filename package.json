@@ -18,11 +18,11 @@
   "author": "Mark Robson <mark.o.robson@gmail.com> (http://digioli.co.uk)",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^2.3.3",
-    "should": "^7.1.1",
     "jshint": "^2.8.0",
-    "nodemon": "^1.8.0"
+    "mocha": "^2.3.3",
+    "nodemon": "^1.8.0",
+    "should": "^7.1.1",
+    "sinon": "^1.17.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

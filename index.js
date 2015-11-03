@@ -78,6 +78,19 @@ es6.arrows.reduce = function () {
   return params.reduce((a, b) => a + b, 0);
 };
 
+/**
+ * Delay calling a function. 
+ * @param  {function} func is the function to execute. Pass in any parameters after wait.
+ * @param  {number} wait in miliseconds i.e. 1000 is approx a second
+ */
+es6.arrows.delay = function (func, wait) {
+  var args = Array.prototype.slice.call(arguments, 2, arguments.length);
+  setTimeout(() => func.apply(func, args), wait);
+};
+
+
+
+
 ///////////////////////////////////////////////////////////////
 // Exports
 ///////////////////////////////////////////////////////////////
