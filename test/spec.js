@@ -30,14 +30,50 @@ describe("const", function () {
 
   it("changing value should throw an error ", function () {
     (function () { 
-      app.testConstValue();
+      app.variables.testConstValue();
     }).should.throw();
   });
 
 });
 
 ///////////////////////////////////////////////
-// Arrows
+// Classes
+///////////////////////////////////////////////
+
+describe("class Tree", function () {
+
+  var t;
+
+  beforeEach(function () {
+    t = new app.classes.Tree(5);
+  });
+
+  afterEach(function () {
+    delete t;
+  });
+
+  it("should create a valid instance", function () {
+    t.getValue().should.eql(5);
+  });
+
+  it("should add a child", function () {
+    t.addChild(4);
+    t.addChild(new app.classes.Tree(8));
+  });
+
+  it("should flatten the tree", function () {
+    var t = new app.classes.Tree(5);
+    var c = new app.classes.Tree(5);
+    var d = new app.classes.Tree(6);
+    c.addChild(d);
+    t.addChild(c);
+    t.flatten().should.eql([5,5,6]);
+  });
+
+});
+
+///////////////////////////////////////////////
+// Arrow functions
 ///////////////////////////////////////////////
 
 describe("arrows", function () {

@@ -10,7 +10,7 @@
     "test": "mocha",
     "lint": "jshint index.js",
     "watch-test": "npm run lint & mocha -w",
-    "dev": "npm run watch-test & nodemon --harmony --use_strict --watch index.js"
+    "dev": "npm run watch-test & nodemon --harmony --use_strict --watch modules/* index.js "
   },
   "keywords": [
     "es6"
