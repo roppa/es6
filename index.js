@@ -8,11 +8,11 @@ exports.variables = require("./modules/variables");
 // Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 exports.classes = require("./modules/classes");
 
-// Objects
-exports.objects = require("./modules/object");
-
 // Arrow functions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 exports.arrows = require("./modules/arrow-functions");
+
+// Objects
+exports.objects = require("./modules/object");
 
 ///////////////////////////////////////////////////////////////
 // Arrays

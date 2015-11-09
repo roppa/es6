@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha",
     "lint": "jshint index.js",
-    "watch-test": "npm run lint & mocha -w",
+    "watch-test": "npm run lint & mocha --recursive -w",
     "dev": "npm run watch-test & nodemon --harmony --use_strict --watch modules/* index.js "
   },
   "keywords": [

@@ -5,7 +5,7 @@ exports = module.exports = {};
 /**
  * Example of class using a Tree structure.
  */
-exports.Tree = class Tree {
+class Tree {
 
   constructor (value) {
     this.value = value;
@@ -38,3 +38,73 @@ exports.Tree = class Tree {
 
 };
 
+exports.Tree = Tree;
+
+///////////////////////////////////////////////////////////////////////////
+// Example with inheritance
+///////////////////////////////////////////////////////////////////////////
+
+/*
+* Animal super class
+*/
+class Animal {
+
+  constructor (type, food, position) {
+    this.type = type;
+    this.food = food;
+    this.position = position || {
+      x: 0,
+      y: 0,
+      z: 0
+    }
+  }
+
+  move (position) {
+    this.position = position;
+  }
+
+  eat (food) {
+    return "I just ate " + this.food;
+  }
+
+  communicate (noise) {
+    return noise;
+  }
+
+};
+
+exports.Animal = Animal;
+
+/*
+* Dog class
+*/
+class Dog extends Animal {
+
+  constructor (name, food, position) {
+    super(name, food, position);
+  }
+
+  bark () {
+    return this.communicate("woof woof");
+  }
+  
+};
+
+exports.Dog = Dog;
+
+/*
+* Cat class
+*/
+class Cat extends Animal {
+  
+  constructor (name, food, position) {
+    super(name, food, position);
+  }
+
+  meow () {
+    return this.communicate("Meeooowww");
+  }
+
+};
+
+exports.Cat = Cat;
