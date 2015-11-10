@@ -77,6 +77,15 @@ describe("class Dog", function () {
     max.eat().should.eql("I just ate Dog biscuits");  
   });
   
+  it("should get name", function () {
+    max.name.should.eql("Max");  
+  });
+
+  it("should set name", function () {
+    max.name = "Bob";
+    max.name.should.eql("Bob");  
+  });
+
 });
 
 describe("class Cat", function () {

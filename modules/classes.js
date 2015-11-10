@@ -71,6 +71,13 @@ class Animal {
     return noise;
   }
 
+  get name () {
+    return this._name;
+  }
+
+  set name (name) {
+    this._name = name;
+  }
 };
 
 exports.Animal = Animal;
@@ -81,7 +88,8 @@ exports.Animal = Animal;
 class Dog extends Animal {
 
   constructor (name, food, position) {
-    super(name, food, position);
+    super("Dog", food, position);
+    this.name = name;
   }
 
   bark () {
@@ -98,7 +106,8 @@ exports.Dog = Dog;
 class Cat extends Animal {
   
   constructor (name, food, position) {
-    super(name, food, position);
+    super("Cat", food, position);
+    this.name = name;
   }
 
   meow () {
