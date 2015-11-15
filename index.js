@@ -17,6 +17,9 @@ exports.objects = require("./modules/object");
 // Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 exports.promise = require("./modules/promise");
 
+//Strings - additions to the string object
+exports.strings = require("./modules/strings");
+
 ///////////////////////////////////////////////////////////////
 // Arrays
 ///////////////////////////////////////////////////////////////

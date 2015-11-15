@@ -6,7 +6,7 @@ exports.later = () => {
 
     setTimeout(() => {
       resolve("later");
-    }, 1000);
+    }, 100);
 
   });
 
@@ -17,7 +17,7 @@ exports.owch = () => {
   return new Promise(function (resolve, reject) {
     setTimeout(() => {
       reject("owch");
-    }, 1000);
+    }, 100);
   });
 
 };
