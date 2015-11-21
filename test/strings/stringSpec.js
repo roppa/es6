@@ -7,7 +7,7 @@ var app = require("../../index.js");
 // String Object additions
 ///////////////////////////////////////////////
 
-describe("String Object additions", function () {
+describe("String Object additions", () => {
 
   //uses startsWith and endsWith
   it("Both ends testing, should return true for correct value", () => {
@@ -38,6 +38,20 @@ describe("String Object additions", function () {
   it("Should repeat a string the specified times", () => {
     app.strings.lorem(3).length.should.eql(645 * 3);
     app.strings.lorem(-1).length.should.eql(0);
+  });  
+
+});
+
+describe("String template", () => {
+
+  var name = "Bob Johnson";
+  var welcome = "Hello"
+  var message = "Great to see you again.";
+
+  //template strings - literals wrapped in back ticks `xxx` allowing embedded expressions like PHP
+  ////https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings
+  it ("Should correctly process a string template", () => {
+    `${welcome} ${name}. ${message} Thanks!`.should.eql("Hello Bob Johnson. Great to see you again. Thanks!");
   });
 
 });
