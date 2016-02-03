@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 exports = module.exports = {};
 
@@ -36,7 +36,7 @@ class Tree {
     return result;
   }
 
-};
+}
 
 exports.Tree = Tree;
 
@@ -56,7 +56,8 @@ class Animal {
       x: 0,
       y: 0,
       z: 0
-    }
+    };
+
   }
 
   move (position) {
@@ -64,7 +65,7 @@ class Animal {
   }
 
   eat (food) {
-    return "I just ate " + this.food;
+    return 'I just ate ' + this.food;
   }
 
   communicate (noise) {
@@ -78,7 +79,8 @@ class Animal {
   set name (name) {
     this._name = name;
   }
-};
+
+}
 
 exports.Animal = Animal;
 
@@ -88,15 +90,15 @@ exports.Animal = Animal;
 class Dog extends Animal {
 
   constructor (name, food, position) {
-    super("Dog", food, position);
+    super('Dog', food, position);
     this.name = name;
   }
 
   bark () {
-    return this.communicate("woof woof");
+    return this.communicate('woof woof');
   }
-  
-};
+
+}
 
 exports.Dog = Dog;
 
@@ -104,16 +106,16 @@ exports.Dog = Dog;
 * Cat class
 */
 class Cat extends Animal {
-  
+
   constructor (name, food, position) {
-    super("Cat", food, position);
+    super('Cat', food, position);
     this.name = name;
   }
 
   meow () {
-    return this.communicate("Meeooowww");
+    return this.communicate('Meeooowww');
   }
 
-};
+}
 
 exports.Cat = Cat;

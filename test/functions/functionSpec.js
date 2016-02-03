@@ -1,58 +1,76 @@
-var should = require("should");
-var sinon = require("sinon");
-var app = require("../../index.js");
+'use strict';
+
+let should = require('should');
+let sinon = require('sinon');
+let app = require('../../index.js');
 
 ///////////////////////////////////////////////
 // Arrow functions
 ///////////////////////////////////////////////
 
-describe("arrows", function () {
+describe('arrows', () => {
 
-  describe("identity", function () {
+  describe('identity', () => {
 
-    it("should return itself", function () {
-      app.arrows.identity("string").should.equal("string");
+    it('should return itself', () => {
+      app.arrows.identity('string').should.equal('string');
     });
-  
+
   });
 
-  it("no parameters should return test", function () {
-    app.arrows.noParams().should.equal("Hello world");
+  it('no parameters should return test', () => {
+    app.arrows.noParams().should.equal('Hello world');
   });
 
-  describe("reduce", function () {
+  describe('reduce', () => {
 
-    it("should add all values of varying arity", function () {
+    it('should add all values of varying arity', () => {
       app.arrows.reduce(1,2,3,4).should.equal(10);
     });
 
   });
 
-  describe("first", function () {
+  describe('flatten', () => {
 
-    it("should return first element when no second param", function () {
+    it('should reduce nested arrays', () => {
+      app.arrows.flatten(1,2,[3,4]).should.eql([1,2,3,4]);
+      app.arrows.flatten(1,2,[3,4],[5,6]).should.eql([1,2,3,4,5,6]);
+      app.arrows.flatten(1,2,[3,4],[5,6,[7,8]]).should.eql([1,2,3,4,5,6,7,8]);
+      app.arrows.flatten(1,[2,[3,4]],[5,[6,[7,8]]]).should.eql([1,2,3,4,5,6,7,8]);
+    });
+
+  });
+
+  describe('first', () => {
+
+    it('should return first element when no second param', () => {
       app.arrows.first([1,2,3,4]).should.equal(1);
     });
 
-    it("should slice 2 elements from beginning", function () {
+    it('should slice 2 elements from beginning', () => {
       app.arrows.first([1,2,3,4], 2).should.eql([1,2]);
     });
 
   });
 
-  describe("delay", function () {
+  describe('delay', () => {
 
-    var clock;
-    var callback;
+    let clock;
+    let callback;
 
-    before(function () { clock = sinon.useFakeTimers(); });
-    after(function () { clock.restore(); });
+    before(() => {
+      clock = sinon.useFakeTimers();
+    });
 
-    beforeEach(function () {
+    after(() => {
+      clock.restore();
+    });
+
+    beforeEach(() => {
       callback = sinon.spy();
     });
 
-    it("should only execute the function after the specified wait time", function (done) {
+    it('should only execute the function after the specified wait time', done => {
       app.arrows.delay(callback, 100);
       clock.tick(99);
       should(callback.notCalled).be.ok();
@@ -61,19 +79,19 @@ describe("arrows", function () {
       done();
     });
 
-    it("should have successfully passed function arguments in", function(done) {
+    it('should have successfully passed function arguments in', function(done) {
       app.arrows.delay(callback, 100, 1, 2);
       clock.tick(100);
       callback.calledWith(1, 2).should.be.ok();
       done();
     });
 
-    it("should keep reference to object when called as a method", function (done) {
-      var result;
-      var Car = function (make) {
+    it('should keep reference to object when called as a method', done => {
+      let result;
+      let Car = function (make) {
         this.make = make;
       };
-      var ford = new Car("Ford");
+      let ford = new Car('Ford');
 
       Car.prototype.getMake = function () {
         return this.make;
@@ -81,7 +99,7 @@ describe("arrows", function () {
 
       app.arrows.delay(() => result = ford.getMake(), 100);
       clock.tick(100);
-      result.should.eql("Ford");
+      result.should.eql('Ford');
       done();
 
     });

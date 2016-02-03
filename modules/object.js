@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = exports = {};
 
@@ -6,7 +6,7 @@ module.exports = exports = {};
 //Object.prototype.__proto__ is part of the es6 spec, but it is recommended not to use it. 
 
 /**
- * Example of the SetPrototypeOf static method. 
+ * Example of the SetPrototypeOf static method.
  * @param  {object} obj   [description]
  * @param  {} proto [description]
  */

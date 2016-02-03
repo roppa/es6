@@ -10,14 +10,14 @@ exports = module.exports;
  */
 exports.let = function () {
   {
-    let test = "blockScope";
+    let test = 'blockScope';
   }
   return typeof test; //undefined
 };
 
 exports.loop = function () {
   for (let i = 0; i < 1; i++) {
-    let test = "blockScope";
+    let test = 'blockScope';
   }
   return typeof test; //undefined
 };
@@ -29,8 +29,8 @@ exports.loop = function () {
  */
 exports.testConstValue = function () {
 
-  const constantValue = "unchangeable";
-  constantValue = "changed"; //should throw an error
+  const constantValue = 'unchangeable';
+  constantValue = 'changed'; //should throw an error
   return constantValue;
 
 };
