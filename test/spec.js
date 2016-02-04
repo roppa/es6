@@ -1,23 +1,23 @@
-var should = require("should");
-var sinon = require("sinon");
-var app = require("../index.js");
+'use strict';
+
+let app = require('../index.js');
 
 ///////////////////////////////////////////////
 // Let
 ///////////////////////////////////////////////
 
-describe("let in a block", function () {
+describe('let in a block', function () {
 
-  it("should be block level scope", function () {
-    app.variables.let().should.equal("undefined");
+  it('should be block level scope', function () {
+    app.variables.let().should.equal('undefined');
   });
 
 });
 
-describe("let in a for loop", function () {
+describe('let in a for loop', function () {
 
-  it("should be block level scope", function () {
-    app.variables.loop().should.equal("undefined");
+  it('should be block level scope', function () {
+    app.variables.loop().should.equal('undefined');
   });
 
 });
@@ -26,12 +26,14 @@ describe("let in a for loop", function () {
 // Const
 ///////////////////////////////////////////////
 
-describe("const", function () {
+describe('const', function () {
 
-  it("changing value should throw an error ", function () {
-    (function () { 
+  it('changing value should throw an error ', () => {
+
+    (() => {
       app.variables.testConstValue();
     }).should.throw();
+
   });
 
 });

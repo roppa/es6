@@ -61,14 +61,6 @@ Again, ```let``` adds to the predictablity and readability of your code.
 
 Strings now allow templating. We used to concat strings manually using the ```+``` operator. Now we can use the ```\``` back tick instead of a single or double quote. In that string we can insert varaibles using ```${myVar}```
 
-##Arrow functions
-
-Example with one parameter. If a function needs to provide an iterator when the user does not pass one in, this will be handy
-
-```
-let identity = identity => identity;
-```
-
 ##Rest parameters
 
 You know how we have always had access to the ```arguments``` object, which is kind of like an array, but not quite? Rest params are so much better than arguments.
@@ -108,11 +100,53 @@ multiply(...args);
 
 ##Default parameter values
 
-Just like PHP you can now set default values for parameters.
+Just like PHP you can now set default values for parameters. If any parameter is falsy, it is set to the default.
 
 ```
 let formatBalance = (balance = 0, name = 'Unknown', currency = '£') => 
   `${name}, your balance is ${currency}${balance}`;
+```
+
+This saves us from having to do things like:
+
+```
+function myFunction (a, b) {
+  a = a || 0;
+  b = b ? b : 0;
+  //...
+}
+```
+
+Default parameters are lexically scoped too:
+
+```
+let count = 0;
+let increment = (i = count) => {
+  let count; //lexically scoped
+  return ++count;
+}
+
+increment(); //NaN
+```
+
+You can also set a default value to a function call. 
+
+##Caveats
+
+You can't set a default on a Rest param, so no doing:
+
+```
+function myFunction (...args = [1,2,3]) { ...
+```
+
+Default values do no get included in the arguments object:
+
+```
+function myFunction (a = 1, b = 2, c = 3) {
+  console.log(arguments.length);
+}
+
+myFunction(); //0
 ```
 
 ##Destructuring
@@ -289,6 +323,14 @@ We can see that ```bind``` doesn't do as we thought. That's because you can't al
 
 So the rule is to still use ```function``` when it is suitable. I'm just going to use ```function``` as methods rather than Arrow functions, unless I really don't want the ```this``` parameter to be overridden.
 
+
+
+Example with one parameter. If a function needs to provide an iterator when the user does not pass one in, this will be handy
+
+```
+let identity = identity => identity;
+```
+
 ##Modules
 
 A module is a single object or a function in a file. The code in the file is made available by the ```export``` keyword.
@@ -302,4 +344,13 @@ Classes, Collection maps and Weakmaps, Objects, Promises, Iterators and Generato
 - [ECMAScript wiki](http://wiki.ecmascript.org/doku.php)
 - [Frontend Masters ES6 course](https://frontendmasters.com/courses/jsnext-es6)
 - [Exploring ES6](http://exploringjs.com/es6/)
-
+- [Smashing magazine](http://www.smashingmagazine.com/2015/10/es6-whats-new-next-version-javascript/)
+- [es6 and node compatibility](https://leanpub.com/understandinges6/read/#leanpub-auto-browser-and-nodejs-compatibility)
+- [Mozilla deveoper](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)
+- [Mozilla hacks arrow functions](https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/)
+- [ES6 Katas](http://es6katas.org/)
+- [brendaneich.com](https://brendaneich.com/tag/javascript-ecmascript-harmony-coffeescript/)
+- [uxebu.com](http://www.uxebu.com/blog/2015/06/learn-ecmascript-6-in-a-different-way/)
+- [wintellect.com](http://www.wintellect.com/devcenter/nstieglitz/5-great-features-in-es6-harmony)
+- [lukehoban on Github](https://github.com/lukehoban/es6features/blob/master/README.md)
+- [coryrylan.com](http://coryrylan.com/blog/javascript-es6-class-syntax)
