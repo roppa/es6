@@ -357,6 +357,8 @@ class Animal {
 }
 ```
 
+If you don't specify a constructor, it will look through any parent classes, if none then it goes defaults to creating an object and returning it.
+
 Methods are added like this:
 
 ```
@@ -373,6 +375,16 @@ class Dog {
 }
 
 ```
+
+If you want to overide a method and then call the parent method you do so with the ```super``` keyword:
+
+```
+communicate () {
+  return super.communicate('woof woof') + '!!';
+}
+```
+
+Unlike function declarations, Classes aren't hoisted so you have to declare it first. 
 
 ###Getters
 
