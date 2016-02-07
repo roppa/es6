@@ -41,14 +41,6 @@ let a = 1;
 
 Using ```let``` over ```var``` is preferred as it makes your code mirror how it is going to be compiled.
 
-####Temporal Dead Zone
-
-You cant access the variable you have used in your code until it is declared. Sounds weird. 
-
-```let``` is not hoisted, however, memory is allocated when it is compiled. You'll then get a reference error if you try to use that varible before it's been declared. It's much preferred over getting ```undefined``` with ```var```.
-
-Again, ```let``` adds to the predictablity and readability of your code.
-
 ###const
 
 ```const``` as the name suggests is a constant value. Any attempt to reassign the value results in an syntax error. Any redeclaration throws an error.
@@ -57,9 +49,23 @@ Again, ```let``` adds to the predictablity and readability of your code.
 
 ```const``` is block scope just like ```let```.
 
+####Temporal Dead Zone
+
+You cant access the variable you have used in your code until it is declared. Sounds weird. 
+
+```let``` is not hoisted, however, memory is allocated when it is compiled. You'll then get a reference error if you try to use that varible before it's been declared. It's much preferred over getting ```undefined``` with ```var```.
+
+Again, ```let``` adds to the predictablity and readability of your code.
+
 ##Strings
 
 Strings now allow templating. We used to concat strings manually using the ```+``` operator. Now we can use the ```\``` back tick instead of a single or double quote. In that string we can insert varaibles using ```${myVar}```
+
+A cool method on a string is ```repeat```, which, as the name suggests, repeats the string the specified number of times:
+
+```
+"Bart simpson says I must write this 10 times".repeat(10);
+```
 
 ##Rest parameters
 
@@ -261,7 +267,7 @@ Briefly, the parameter "this" refers to 5/6 things:
  5. "apply", just like #4
  6. "bind", similar to #4 and #5 where the argument is the object to be bound
 
-```setTimout``` or ```setInterval``` used to be awkward where we either had to bind the callback function or create a reference such as ```var that = this```. Now we can use an arrow function and the context is maintained.
+The timers ```setTimout``` or ```setInterval``` used to be awkward where we either had to bind the callback function or create a reference such as ```var that = this```. Now we can use an arrow function and the context is maintained.
 
 This binding can be awkward. With the example below we are adding a method on an object called 'bob'.
 
@@ -323,12 +329,139 @@ We can see that ```bind``` doesn't do as we thought. That's because you can't al
 
 So the rule is to still use ```function``` when it is suitable. I'm just going to use ```function``` as methods rather than Arrow functions, unless I really don't want the ```this``` parameter to be overridden.
 
+##Classes
 
+I was asked in an interview recently if I used "classical inheritance" using ES6 Class or whether I used prototypal inheritance and which one was better. I blushed and was slightly confused. ES6 Class is "syntactical sugar" around prototype-based inheritance. The guy didn't really know what he was talking about so I didn't take the job - imagine all that terrible code to inherit, shudder.
 
-Example with one parameter. If a function needs to provide an iterator when the user does not pass one in, this will be handy
+So you know that functions can be used as a constructor, so that it takes the parameter this, constructs a new object, sets it to 'this' and returns it. The convention is that we name the constructor function with an Uppercase first letter so we can distinguish between a function and a constructor function. Now, we can use the class keyword. So instead of this:
 
 ```
-let identity = identity => identity;
+function Animal () { ...
+```
+
+we can do:
+
+```
+class Animal { ...
+```
+
+A class has a constructor function, called ```constructor```.
+
+```
+class Animal {
+
+  constructor (type) {
+    this.type = type;
+  }
+
+}
+```
+
+Methods are added like this:
+
+```
+class Dog {
+
+  constructor (name) {
+    this.name = name;
+  }
+
+  annoy () {
+    return "Bark ... ".repeat(10);
+  }
+
+}
+
+```
+
+###Getters
+
+So a getter is a function that returns a value, but you don't call it like a normal function using parenthesis, you just use the property name:
+
+```
+class Animal {
+
+  constructor (type) {
+    this.type = type;
+  }
+
+  get type () {
+    return this.type;
+  }
+
+}
+
+let dog = new Animal('mamal');
+console.log(dog.type);
+
+```
+
+###Setters
+
+Setters as the name suggests, sets values. It is used just like the getter, a function corresponds to a value. There is reason for caution with setters though. Let's say we had the setter below on the Animal class:
+
+```
+  set type (type) {
+    this.type = type;
+  }
+```
+
+This would cause an infinite loop, throwing a Range error - maximum stack size exceeded.
+
+##Symbols
+
+There is a new datatype in Javascript, the Symbol. I didn't grok symbols straight away, but they are pretty cool. Symbols are unique and immutable. They key thing is "unique", never giving you the same one twice. 
+
+A great use for Symbol is private variables in classes:
+
+```
+let Animal = (() => {
+
+  let animalType = Symbol('type');
+
+  return class Animal {
+    
+    constructor (name, type) {
+      this.name = name;
+      this[animalType] = type;
+    }
+
+    get type () {
+      return this[animalType];
+    }
+
+  }
+
+}());
+
+let a = new Animal('dog', 'mamal');
+console.log(a.name);
+console.log(a.type);
+a.type = 'reptile'; //Type error
+
+```
+
+###References
+
+ - [Mozilla docs](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+
+##Class Inheritance
+
+You can easily extend a class by using the ```extends``` keyword, followed by the ancestor:
+
+```
+class Dog extends Animal {
+
+  constructor (name) {
+    super('Dog', 'mamal');
+    this.name = name;
+  }
+
+  bark () {
+    return this.communicate('woof woof');
+  }
+
+}
 ```
 
 ##Modules
@@ -337,7 +470,7 @@ A module is a single object or a function in a file. The code in the file is mad
 
 ##Coming soon
 
-Classes, Collection maps and Weakmaps, Objects, Promises, Iterators and Generators
+Collection maps and Weakmaps, Objects, Promises, Iterators and Generators
 
 ##Resources
 
