@@ -476,13 +476,220 @@ class Dog extends Animal {
 }
 ```
 
+##Promises
+
+So we've all used libraries like Q or Bluebird - and Promises in jQuery - so the ES6 Promise is a welcome addition to the language. I mean, they are great, but not as great as Observables in Functional Reactive Programming.
+
+
+###The Promise constructor
+
+To create a promise, you need to pass in the function which takes to parameters, one to handle a successful operation and an error handling function:
+
+```
+return new Promise((resolve, reject) => {
+```
+
+###The Promise Instance
+
+A promise can be in 1 of 4 states:
+
+ - fulfilled: resolved - 1
+ - rejected: 2
+ - pending: either rejected or resolved hasn't happened yet - undefined
+ - settled: either rejected or resolved has occured - 1 or 2
+
+Once you get a promise returned, you call the then the ```then``` method, takes in your resolve, reject functions: 
+
+```
+funcThatReturnsPromise()
+  .then(result => {
+    return result + ' worked';
+  }, error => {
+    return 'didn\'t work';
+  };
+```
+
+You can do chaining too. If you want to do something with the resolved data you can pass it on:
+
+```
+funcThatReturnsPromise()
+  .then(function (result) {
+    return result + ', chained once';
+  })
+  .then(function (result) {
+    return result + ', chained twice';
+  })
+  .then(function (result) {
+    return result + ', chained thrice';
+  })
+  .then(function (result) {
+    result.should.eql('later, chained once, chained twice, chained thrice');
+  })
+  .catch((reason) => {
+    return reason;
+  });
+```
+
+Notice that you can put your reject handler in the ```.catch``` method too. If anything breaks along the chain, it "bubbles up" and is caught in the last catch.
+
+###Promise.all
+
+Promise.all takes an array of promises/functions that return a promise, and waits for all of them to complete. The result of which is an array containing all the values returned from the promises:
+
+```
+Promise.all([app.promise.later(), app.promise.later(), app.promise.later()])
+  .then((values) => {
+    //values should equal ['later', 'later', 'later']
+  });
+```
+
+If any of them fail then you can catch it as before.
+
+###Promise.race
+
+Promise.race takes an array of promises/functions that return a promise, and uses the first promise that has completed in the resolve function:
+
+```
+Promise.race([app.promise.slow(), app.promise.medium(), app.promise.fast()])
+  .then((result) => {
+    // result should equal 'fast!'
+  });
+```
+
 ##Modules
 
-A module is a single object or a function in a file. The code in the file is made available by the ```export``` keyword.
+A module is a single object or a function in a file. The code in the file is made available by the ```export``` keyword. 
 
-##Coming soon
+It has features from common.js and AMD. It has cycical dependancies, so if you load two or more modules that depend on each other then that is OK.
 
-Collection maps and Weakmaps, Objects, Promises, Iterators and Generators
+###Import and export
+
+The ```export``` object is just that, an object. It can be a function object, and you can attach other things to that object.
+
+```
+export 
+```
+
+To set the default export:
+
+```
+class Animal {
+  constructor () {}
+};
+export default Animal;
+```
+
+Aliasing: 
+
+```
+class Animal {
+  constructor () {}
+};
+export {Animal as Creature};
+```
+
+To import:
+
+```
+import Animal from 'Animal';
+```
+
+You can use aliases.
+
+```
+import { concat, reduce } from 'underscore';
+```
+
+```
+import * as _ from 'underscore';
+```
+
+##Programatic Loading - System.import
+
+It's based on Promises.
+
+```
+System.import('Animal').
+  then(Animal => {
+    //...
+  }).
+  catch(error => {
+    //...
+  });
+```
+
+System methods:
+
+ - System.import(module) //returns Promise
+ - System.module(module, options) //returns Promise
+ - System.set(name, module) //register a new module
+ - System.define(name, source, ...options) //
+
+The module tag: <module import="animal.js"></module>
+
+
+##Collections - Maps, Sets and Weakmaps
+
+###Set
+
+A set data structure is a collection, like an array, however it's values are unique.
+
+To create an instance of a set:
+
+```
+let alphabet = new Set();
+alphabet.add('a');
+alphabet.add('b');
+...
+```
+
+or you can pass an array as a param to be used for the set:
+
+```
+let alphabet = new Set(['a', 'b', 'c', 'd']);
+```
+
+Set methods:
+
+```
+alphabet.size; //26
+alphabet.has('a'); //true
+alphabet.has(2); //false
+alphabet.delete(2); //false
+alphabet.clear(); //resets the collection
+```
+
+##Map
+
+Map is a key/value object. 
+
+```
+let teamA = new Map();
+```
+
+Map methods:
+
+```
+teamA.set('Bob Smith', 'Striker');
+```
+
+You can use objects as the key:
+
+```
+let bobSmith = {
+  name: 'Bob Smith',
+  age: 32
+};
+teamA.set(bobSmith, 'Striker');
+```
+
+##Weakmap
+
+Weakmap is like a map but different. It doesn't keep track of the values inside. The key thing with a WeakMap is its keys and garbage collection. You can't have primitive values for keys, only objects. And if the WeakMap sees that one of its keys is the only reference to an object, then it will garbage collect it.
+
+```
+let teamA = new WeakMap();
+```
 
 ##Resources
 

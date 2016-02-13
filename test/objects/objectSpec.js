@@ -1,6 +1,7 @@
-var should = require("should");
-var sinon = require("sinon");
-var app = require("../../index.js");
+'use strict';
+
+require('should');
+let app = require('../../index.js');
 
 ///////////////////////////////////////////////
 // Object
@@ -8,7 +9,7 @@ var app = require("../../index.js");
 
 describe('Object', function() {
 
-  var Coordinates = function Coordinates (x, y) {
+  let Coordinates = function Coordinates (x, y) {
     this.x = x || 42;
     this.y = y || 42;
   };
@@ -19,7 +20,7 @@ describe('Object', function() {
 
   it('should be able to change the prototype of an object', function() {
 
-    var position = {};
+    let position = {};
 
     (position instanceof Object).should.be.ok();
     (position instanceof Coordinates).should.not.be.ok();
