@@ -1,8 +1,8 @@
-#ES6 or ECMA Script 6 or ES 2015.
+# ES6 or ECMA Script 6 or ES 2015.
 
-[es6fiddle.net](http://www.es6fiddle.net/) is a great resource to try things out in a browser. Check out [the comtability tables](http://kangax.github.io/compat-table/es6/) too. 
+[es6fiddle.net](http://www.es6fiddle.net/) is a great resource to try things out in a browser. Check out [the comtability tables](http://kangax.github.io/compat-table/es6/) too.
 
-##Tail Call
+## Tail Call
 
 Doing recursive calls in Javascript eats up the memory as each call is added onto the call stack. Asymptotically it is O(n). That is because Javascript is not a proper tail recursive language. That is until now. Proper tail recursion causes no memory increase over time when a recursive function is called. In current browsers a recursive function would break if it called itself ~10K. With proper tail call language the asymptotic behaviuour is O(1).
 
@@ -19,15 +19,15 @@ The main thing to keep in mind when doing recursion is to pass everything to the
 
 At the moment it is not very widely supported at all :'(
 
-##Variables - Var, Let and Const
+## Variables - Var, Let and Const
 
-###var
+### var
 
-You have to understand what ```var``` does before you understand ```let``` and ```const```. ```var``` is hoisted to the top of the function it is defined in during the compilation stage and it is function scope. 
+You have to understand what ```var``` does before you understand ```let``` and ```const```. ```var``` is hoisted to the top of the function it is defined in during the compilation stage and it is function scope.
 
 Redeclaring the same variable with ```var``` is a no-ops, meaning it skips the step of allocating disc space for the variable and continues on to assigning a value to it.
 
-###let
+### let
 
 ```let``` has a block level scope, rather than function scope. It is ideal in for loops or "flag" variables as it is not hoisted like ```var```.
 
@@ -41,7 +41,7 @@ let a = 1;
 
 Using ```let``` over ```var``` is preferred as it makes your code mirror how it is going to be compiled.
 
-###const
+### const
 
 ```const``` as the name suggests is a constant value. Any attempt to reassign the value results in an syntax error. Any redeclaration throws an error.
 
@@ -49,15 +49,15 @@ Using ```let``` over ```var``` is preferred as it makes your code mirror how it 
 
 ```const``` is block scope just like ```let```.
 
-####Temporal Dead Zone
+### #Temporal Dead Zone
 
-You cant access the variable you have used in your code until it is declared. Sounds weird. 
+You cant access the variable you have used in your code until it is declared. Sounds weird.
 
 ```let``` is not hoisted, however, memory is allocated when it is compiled. You'll then get a reference error if you try to use that varible before it's been declared. It's much preferred over getting ```undefined``` with ```var```.
 
 Again, ```let``` adds to the predictablity and readability of your code.
 
-##Strings
+## Strings
 
 Strings now allow templating. We used to concat strings manually using the ```+``` operator. Now we can use the ```\``` back tick instead of a single or double quote. In that string we can insert varaibles using ```${myVar}```
 
@@ -67,7 +67,7 @@ A cool method on a string is ```repeat```, which, as the name suggests, repeats 
 "Bart simpson says I must write this 10 times".repeat(10);
 ```
 
-##Rest parameters
+## Rest parameters
 
 You know how we have always had access to the ```arguments``` object, which is kind of like an array, but not quite? Rest params are so much better than arguments.
 
@@ -77,9 +77,9 @@ We used to have to do ```var args = Array.prototype.slice.call(arguments);``` to
 let showArgs = (...args) => args;
 ```
 
-###Caveats
+### Caveats
 
-Rest params must be the last in a list of parameters. When it is used it has reference to all the arguments after the last named argument. 
+Rest params must be the last in a list of parameters. When it is used it has reference to all the arguments after the last named argument.
 
 You can't use more than one either.
 
@@ -87,7 +87,7 @@ You can't use it with ```arguments``` - its either one or the other.
 
 No default values.
 
-##Spread operators
+## Spread operators
 
 The spread operator is ```...```. Looks familiar huh? It is used before an array to pull each value out. It saves you from manually targeting elements of an array.
 
@@ -104,12 +104,12 @@ let args = [5, 5];
 multiply(...args);
 ```
 
-##Default parameter values
+## Default parameter values
 
 Just like PHP you can now set default values for parameters. If any parameter is falsy, it is set to the default.
 
 ```
-let formatBalance = (balance = 0, name = 'Unknown', currency = '£') => 
+let formatBalance = (balance = 0, name = 'Unknown', currency = '£') =>
   `${name}, your balance is ${currency}${balance}`;
 ```
 
@@ -135,7 +135,7 @@ let increment = (i = count) => {
 increment(); //NaN
 ```
 
-You can also set a default value to a function call. 
+You can also set a default value to a function call.
 
 ##Caveats
 
@@ -155,13 +155,13 @@ function myFunction (a = 1, b = 2, c = 3) {
 myFunction(); //0
 ```
 
-##Destructuring
+## Destructuring
 
 "Destructuring allows you to bind a set of variables to a corresponding set of values anywhere that you can normally bind a value to a single variable"
 
 Destructuring objects and arrays. With objects we destructure by taking attributes and their values. The thing being destructured MUST be an object.
 
-###Objects
+### Objects
 
 ```
 let getUserById = id => {
@@ -201,13 +201,13 @@ let doSomethingWithUserObject = ({name, age, location}) => {
 Even better with default values:
 
 ```
-let formatBalance = ({ balance: b = 0, name: n = 'Unknown', currency: c = '£'}) => 
+let formatBalance = ({ balance: b = 0, name: n = 'Unknown', currency: c = '£'}) =>
   `${n}, your balance is ${c}${b}`;
 
 formatBalance({ balance: 10 });
 ```
 
-###Arrays
+### Arrays
 
 Similar to Objects we target array elements by their position, and use the square bracket indicating an array rather than a curly brace for an object.
 
@@ -217,7 +217,7 @@ let [winner, second, third,,, last] = winners;
 console.log(winner, second, third, last);
 ```
 
-##Arrow functions
+## Arrow functions
 
 This implementation is based on Coffeescript. Coffeescript has two versions of arrow functions - skinny and fat arrows.
 
@@ -258,7 +258,7 @@ let myFunction = (...params) => {
 
 Arrow functions by default bind the parameter this to the lexical context. What this means is Arrow functions do not have their own "this", instead it is inherited from the "surrounding" scope.
 
-Briefly, the parameter "this" refers to 5/6 things: 
+Briefly, the parameter "this" refers to 5/6 things:
 
  1. Global context
  2. Function context (which is global)
@@ -384,9 +384,9 @@ communicate () {
 }
 ```
 
-Unlike function declarations, Classes aren't hoisted so you have to declare it first. 
+Unlike function declarations, Classes aren't hoisted so you have to declare it first.
 
-###Getters
+### Getters
 
 So a getter is a function that returns a value, but you don't call it like a normal function using parenthesis, you just use the property name:
 
@@ -408,7 +408,7 @@ console.log(dog.type);
 
 ```
 
-###Setters
+### Setters
 
 Setters as the name suggests, sets values. It is used just like the getter, a function corresponds to a value. There is reason for caution with setters though. Let's say we had the setter below on the Animal class:
 
@@ -420,9 +420,9 @@ Setters as the name suggests, sets values. It is used just like the getter, a fu
 
 This would cause an infinite loop, throwing a Range error - maximum stack size exceeded.
 
-##Symbols
+## Symbols
 
-There is a new datatype in Javascript, the Symbol. I didn't grok symbols straight away, but they are pretty cool. Symbols are unique and immutable. They key thing is "unique", never giving you the same one twice. 
+There is a new datatype in Javascript, the Symbol. I didn't grok symbols straight away, but they are pretty cool. Symbols are unique and immutable. They key thing is "unique", never giving you the same one twice.
 
 A great use for Symbol is private variables in classes:
 
@@ -432,7 +432,7 @@ let Animal = (() => {
   let animalType = Symbol('type');
 
   return class Animal {
-    
+
     constructor (name, type) {
       this.name = name;
       this[animalType] = type;
@@ -453,11 +453,11 @@ a.type = 'reptile'; //Type error
 
 ```
 
-###References
+### References
 
  - [Mozilla docs](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
 
-##Class Inheritance
+## Class Inheritance
 
 You can easily extend a class by using the ```extends``` keyword, followed by the ancestor:
 
@@ -476,12 +476,12 @@ class Dog extends Animal {
 }
 ```
 
-##Promises
+## Promises
 
 So we've all used libraries like Q or Bluebird - and Promises in jQuery - so the ES6 Promise is a welcome addition to the language. I mean, they are great, but not as great as Observables in Functional Reactive Programming.
 
 
-###The Promise constructor
+### The Promise constructor
 
 To create a promise, you need to pass in the function which takes to parameters, one to handle a successful operation and an error handling function:
 
@@ -489,7 +489,7 @@ To create a promise, you need to pass in the function which takes to parameters,
 return new Promise((resolve, reject) => {
 ```
 
-###The Promise Instance
+### The Promise Instance
 
 A promise can be in 1 of 4 states:
 
@@ -498,7 +498,7 @@ A promise can be in 1 of 4 states:
  - pending: either rejected or resolved hasn't happened yet - undefined
  - settled: either rejected or resolved has occured - 1 or 2
 
-Once you get a promise returned, you call the then the ```then``` method, takes in your resolve, reject functions: 
+Once you get a promise returned, you call the then the ```then``` method, takes in your resolve, reject functions:
 
 ```
 funcThatReturnsPromise()
@@ -532,7 +532,7 @@ funcThatReturnsPromise()
 
 Notice that you can put your reject handler in the ```.catch``` method too. If anything breaks along the chain, it "bubbles up" and is caught in the last catch.
 
-###Promise.all
+### Promise.all
 
 Promise.all takes an array of promises/functions that return a promise, and waits for all of them to complete. The result of which is an array containing all the values returned from the promises:
 
@@ -545,7 +545,7 @@ Promise.all([app.promise.later(), app.promise.later(), app.promise.later()])
 
 If any of them fail then you can catch it as before.
 
-###Promise.race
+### Promise.race
 
 Promise.race takes an array of promises/functions that return a promise, and uses the first promise that has completed in the resolve function:
 
@@ -556,18 +556,18 @@ Promise.race([app.promise.slow(), app.promise.medium(), app.promise.fast()])
   });
 ```
 
-##Modules
+## Modules
 
-A module is a single object or a function in a file. The code in the file is made available by the ```export``` keyword. 
+A module is a single object or a function in a file. The code in the file is made available by the ```export``` keyword.
 
 It has features from common.js and AMD. It has cycical dependancies, so if you load two or more modules that depend on each other then that is OK.
 
-###Import and export
+### Import and export
 
 The ```export``` object is just that, an object. It can be a function object, and you can attach other things to that object.
 
 ```
-export 
+export
 ```
 
 To set the default export:
@@ -579,7 +579,7 @@ class Animal {
 export default Animal;
 ```
 
-Aliasing: 
+Aliasing:
 
 ```
 class Animal {
@@ -627,10 +627,9 @@ System methods:
 
 The module tag: <module import="animal.js"></module>
 
+## Collections - Maps, Sets and Weakmaps
 
-##Collections - Maps, Sets and Weakmaps
-
-###Set
+### Set
 
 A set data structure is a collection, like an array, however it's values are unique.
 
@@ -659,9 +658,21 @@ alphabet.delete(2); //false
 alphabet.clear(); //resets the collection
 ```
 
-##Map
+## Fetch
 
-Map is a key/value object. 
+The Fetch api is an interface to 'fetch' resources. It will be used to supersede XMLHttpRequest.
+
+With fetch, the first argument is mandatory (the resource URI), and then it returns a promise.
+
+```
+fetch('http://localhost:3000/authors')
+  .then(data => JSON.parse(data))
+  .then(console.dir);
+```
+
+## Map
+
+Map is a key/value object.
 
 ```
 let teamA = new Map();
@@ -683,7 +694,7 @@ let bobSmith = {
 teamA.set(bobSmith, 'Striker');
 ```
 
-##Weakmap
+## Weakmap
 
 Weakmap is like a map but different. It doesn't keep track of the values inside. The key thing with a WeakMap is its keys and garbage collection. You can't have primitive values for keys, only objects. And if the WeakMap sees that one of its keys is the only reference to an object, then it will garbage collect it.
 
@@ -691,7 +702,7 @@ Weakmap is like a map but different. It doesn't keep track of the values inside.
 let teamA = new WeakMap();
 ```
 
-##Resources
+## Resources
 
 - [ECMAScript wiki](http://wiki.ecmascript.org/doku.php)
 - [Frontend Masters ES6 course](https://frontendmasters.com/courses/jsnext-es6)
