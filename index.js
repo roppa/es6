@@ -27,7 +27,7 @@ exports.params = require('./modules/params');
 // Symbol
 ///////////////////////////////////////////////////////////////
 
-//symbols are a new promitive
+exports.symbol = require('./modules/symbol');
 
 ///////////////////////////////////////////////////////////////
 // Reflect
@@ -48,6 +48,7 @@ exports.params = require('./modules/params');
 // Array.from()
 
 // Array.of()
+
 // Array.prototype.fill()
 // Array.prototype.find()
 // Array.prototype.entries()
