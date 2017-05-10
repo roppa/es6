@@ -329,7 +329,7 @@ We can see that ```bind``` doesn't do as we thought. That's because you can't al
 
 So the rule is to still use ```function``` when it is suitable. I'm just going to use ```function``` as methods rather than Arrow functions, unless I really don't want the ```this``` parameter to be overridden.
 
-##Classes
+## Classes
 
 I was asked in an interview recently if I used "classical inheritance" using ES6 Class or whether I used prototypal inheritance and which one was better. I blushed and was slightly confused. ES6 Class is "syntactical sugar" around prototype-based inheritance. The guy didn't really know what he was talking about so I didn't take the job - imagine all that terrible code to inherit, shudder.
 
