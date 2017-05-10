@@ -49,7 +49,7 @@ Using ```let``` over ```var``` is preferred as it makes your code mirror how it 
 
 ```const``` is block scope just like ```let```.
 
-### #Temporal Dead Zone
+### Temporal Dead Zone
 
 You cant access the variable you have used in your code until it is declared. Sounds weird.
 
