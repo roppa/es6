@@ -1,4 +1,4 @@
-let Animal = (function () {
+const Animal = (function () {
 
   let animalType = Symbol('type');
 

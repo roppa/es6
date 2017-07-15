@@ -1,5 +1,3 @@
-'use strict';
-
 exports = module.exports = {};
 
 /**
@@ -32,6 +30,7 @@ class Tree {
         traverse(c);
       });
     };
+
     traverse(this);
     return result;
   }
@@ -55,7 +54,7 @@ class Animal {
     this.position = position || {
       x: 0,
       y: 0,
-      z: 0
+      z: 0,
     };
 
   }

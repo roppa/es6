@@ -1,17 +1,9 @@
-'use strict';
+const should = require('should');
+const app = require('../../index.js');
 
-let should = require('should');
-let app = require('../../index.js');
-
-///////////////////////////////////////////////
-// Params
-///////////////////////////////////////////////
-
-describe('Params', function() {
-
+describe('Params', () => {
   it('should handle multiple parameters', done => {
-    app.params.add(1,2,3,4,5,6,7,8,9,10).should.eql(55);
+    app.params.add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).should.eql(55);
     done();
   });
-
 });

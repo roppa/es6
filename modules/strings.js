@@ -1,5 +1,3 @@
-'use strict';
-
 exports = module.exports = {};
 
 let lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.

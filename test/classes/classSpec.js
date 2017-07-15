@@ -1,5 +1,3 @@
-'use strict';
-
 require('should');
 
 let app = require('../../index.js');
@@ -40,7 +38,7 @@ describe('class Tree', function () {
     let d = new Tree(6);
     c.addChild(d);
     t.addChild(c);
-    t.flatten().should.eql([5,5,6]);
+    t.flatten().should.eql([5, 5, 6]);
   });
 
 });
@@ -102,7 +100,8 @@ describe('class Cat', function () {
   });
 
   it('should have specific attributes', function () {
-    snoop.should.have.properties(['type', 'food', 'position', 'move', 'eat', 'communicate', 'meow']);
+    snoop.should.have.properties(['type', 'food', 'position', 'move',
+      'eat', 'communicate', 'meow']);
   });
 
   it('should meow', function () {

@@ -1,5 +1,3 @@
-'use strict';
-
 require('should');
 let app = require('../../index.js');
 
@@ -7,18 +5,18 @@ let app = require('../../index.js');
 // Object
 ///////////////////////////////////////////////
 
-describe('Object', function() {
+describe('Object', function () {
 
-  let Coordinates = function Coordinates (x, y) {
+  let Coordinates = function Coordinates(x, y) {
     this.x = x || 42;
     this.y = y || 42;
   };
 
   Coordinates.prototype.getPosition = function () {
-    return { x: this.x, y: this.y};
+    return { x: this.x, y: this.y };
   };
 
-  it('should be able to change the prototype of an object', function() {
+  it('should be able to change the prototype of an object', function () {
 
     let position = {};
 

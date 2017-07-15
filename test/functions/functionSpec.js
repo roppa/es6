@@ -1,5 +1,3 @@
-'use strict';
-
 let should = require('should');
 let sinon = require('sinon');
 let app = require('../../index.js');

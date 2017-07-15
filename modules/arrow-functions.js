@@ -1,14 +1,10 @@
-'use strict';
-
 exports = module.exports;
 
 /**
  * Just an example of declaring a arrows function with no parameters
  * @return {string} "Hello world"
  */
-exports.noParams = () => {
-  return 'Hello world';
-};
+exports.noParams = () => 'Hello world';
 
 /**
  * Example with one parameter. If a function needs to provide an iterator when the
@@ -32,9 +28,7 @@ exports.first = (array, n) => n === undefined ? array[0] : array.slice(0, n);
  * Format: (param1, param2, paramN) => expression, from dev.mozilla
  * @return {}
  */
-exports.reduce = (...params) => {
-  return params.reduce((a, b) => a + b, 0);
-};
+exports.reduce = (...params) => params.reduce((a, b) => a + b, 0);
 
 /**
  * Another example of the fat arrow along with parameters ...args.

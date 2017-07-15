@@ -1,5 +1,3 @@
-# ES6 or ECMA Script 6 or ES 2015.
-
 [es6fiddle.net](http://www.es6fiddle.net/) is a great resource to try things out in a browser. Check out [the comtability tables](http://kangax.github.io/compat-table/es6/) too.
 
 ## Tail Call
@@ -7,12 +5,12 @@
 Doing recursive calls in Javascript eats up the memory as each call is added onto the call stack. Asymptotically it is O(n). That is because Javascript is not a proper tail recursive language. That is until now. Proper tail recursion causes no memory increase over time when a recursive function is called. In current browsers a recursive function would break if it called itself ~10K. With proper tail call language the asymptotic behaviuour is O(1).
 
 <dl>
-  <dd>Tail position</dd>
-  <dt>The last instruction to fire before the return statement</dt>
-  <dd>Tail call</dd>
-  <dt>An instruction in a tail position that is a function call</dt>
-  <dd>Close call</dd>
-  <dt>A call that looks like a tail call but isnt. It maintains the stack as in return 1 + myMethod()</dt>
+  <dt>Tail position</dt>
+  <dd>The last instruction to fire before the return statement</dd>
+  <dt>Tail call</dt>
+  <dd>An instruction in a tail position that is a function call</dd>
+  <dt>Close call</dt>
+  <dd>A call that looks like a tail call but isnt. It maintains the stack as in return 1 + myMethod()</dd>
 </dl>
 
 The main thing to keep in mind when doing recursion is to pass everything to the recursive function - don't leave a scope reference as that will add to the call stack.
@@ -29,7 +27,7 @@ Redeclaring the same variable with ```var``` is a no-ops, meaning it skips the s
 
 ### let
 
-```let``` has a block level scope, rather than function scope. It is ideal in for loops or "flag" variables as it is not hoisted like ```var```.
+ ```let``` has a block level scope, rather than function scope. It is ideal in for loops or "flag" variables as it is not hoisted like ```var```.
 
 Redefining a variable with let throws an error:
 
@@ -43,17 +41,17 @@ Using ```let``` over ```var``` is preferred as it makes your code mirror how it 
 
 ### const
 
-```const``` as the name suggests is a constant value. Any attempt to reassign the value results in an syntax error. Any redeclaration throws an error.
+ ```const``` as the name suggests is a constant value. Any attempt to reassign the value results in an syntax error. Any redeclaration throws an error.
 
-```const``` and ```let``` affords more information to the software engineer, rather than seeing 'var' everywhere.
+ ```const``` and ```let``` affords more information to the software engineer, rather than seeing 'var' everywhere.
 
-```const``` is block scope just like ```let```.
+ ```const``` is block scope just like ```let```.
 
 ### Temporal Dead Zone
 
 You cant access the variable you have used in your code until it is declared. Sounds weird.
 
-```let``` is not hoisted, however, memory is allocated when it is compiled. You'll then get a reference error if you try to use that varible before it's been declared. It's much preferred over getting ```undefined``` with ```var```.
+ ```let``` is not hoisted, however, memory is allocated when it is compiled. You'll then get a reference error if you try to use that varible before it's been declared. It's much preferred over getting ```undefined``` with ```var```.
 
 Again, ```let``` adds to the predictablity and readability of your code.
 
@@ -453,10 +451,6 @@ a.type = 'reptile'; //Type error
 
 ```
 
-### References
-
- - [Mozilla docs](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
-
 ## Class Inheritance
 
 You can easily extend a class by using the ```extends``` keyword, followed by the ancestor:
@@ -696,10 +690,51 @@ teamA.set(bobSmith, 'Striker');
 
 ## Weakmap
 
-Weakmap is like a map but different. It doesn't keep track of the values inside. The key thing with a WeakMap is its keys and garbage collection. You can't have primitive values for keys, only objects. And if the WeakMap sees that one of its keys is the only reference to an object, then it will garbage collect it.
+Weakmap is like a map but different. It doesn't keep track of the values inside. The thing with a WeakMap is its keys and garbage collection. You can't have primitive values for keys, only objects. And if the WeakMap sees that one of its keys is the only reference to an object, then it will garbage collect it.
 
 ```
 let teamA = new WeakMap();
+```
+
+## Generators
+
+A function will run through its own internal sequence, it cannot 'pause' execution, it runs through each statement sequentially:
+
+```
+function basic () {
+  console.log(1);
+  console.log(2);
+  console.log(3);
+}
+
+console.log('Basic function');
+basic();
+//> 1
+//> 2
+//> 3
+```
+
+A generator function looks like ```*function ()```, or ```function* ()```, or ```function *()```. Generator functions are paused and continued by use of the ```yield``` keyword. Think of it like the ```return``` keyword, although there can be multiple ones sequentially.  Generators implement the iterator protocol, so when a generator function is called, an iterator object is returned e.g.:
+
+```
+{ value: 3, done: false }
+{ value: undefined, done: true }
+```
+
+```
+function *basicGenerator() {
+  yield console.log(1); // pauses
+  yield console.log(2); // continues on next call
+  yield console.log(3); // ...
+}
+
+console.log('Generator function');
+const iterator = basicGenerator();
+iterator.next(); //> 1
+iterator.next(); //> 2
+iterator.next(); //> 3
+iterator.next(); //>
+console.log(iterator.next()); //>
 ```
 
 ## Resources
@@ -717,3 +752,5 @@ let teamA = new WeakMap();
 - [wintellect.com](http://www.wintellect.com/devcenter/nstieglitz/5-great-features-in-es6-harmony)
 - [lukehoban on Github](https://github.com/lukehoban/es6features/blob/master/README.md)
 - [coryrylan.com](http://coryrylan.com/blog/javascript-es6-class-syntax)
+- [Eric](https://medium.com/javascript-scene/7-surprising-things-i-learned-writing-a-fibonacci-generator-4886a5c87710)
+- [Mozilla docs](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)

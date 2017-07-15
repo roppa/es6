@@ -1,20 +1,19 @@
-'use strict';
 require('should');
 
-let app = require('../../index.js');
+const app = require('../../index.js');
 
 ///////////////////////////////////////////////
 // String Object additions
 ///////////////////////////////////////////////
 
 describe('String Object additions', () => {
-
   //uses startsWith and endsWith
   it('Both ends testing, should return true for correct value', () => {
     app.strings.bothEnds('The cat sat on the mat.', 'The cat').should.be.ok();
     app.strings.bothEnds('The cat sat on the mat.', 'THe cat').should.not.be.ok();
     app.strings.bothEnds('The cat sat on the mat.', 'mat.').should.be.ok();
     app.strings.bothEnds('The cat sat on the mat.', 'ma.').should.not.be.ok();
+
     //should be case sensitive
     app.strings.bothEnds('The cat sat on the mat.', 'The').should.be.ok();
     app.strings.bothEnds('The cat sat on the mat.', 'Mat').should.not.be.ok();
@@ -39,19 +38,17 @@ describe('String Object additions', () => {
     app.strings.lorem(3).length.should.eql(652 * 3);
     app.strings.lorem(-1).length.should.eql(0);
   });
-
 });
 
 describe('String template', () => {
-
-  let name = 'Bob Johnson';
-  let welcome = 'Hello';
-  let message = 'Great to see you again.';
+  const name = 'Bob Johnson';
+  const welcome = 'Hello';
+  const message = 'Great to see you again.';
 
   //template strings - literals wrapped in back ticks `xxx` allowing embedded expressions like PHP
   ////https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings
-  it ('Should correctly process a string template', () => {
-    `${welcome} ${name}. ${message} Thanks!`.should.eql('Hello Bob Johnson. Great to see you again. Thanks!');
+  it('Should correctly process a string template', () => {
+    `${welcome} ${name}. ${message} Thanks!`
+      .should.eql('Hello Bob Johnson. Great to see you again. Thanks!');
   });
-
 });
