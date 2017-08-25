@@ -135,7 +135,7 @@ increment(); //NaN
 
 You can also set a default value to a function call.
 
-##Caveats
+## Caveats
 
 You can't set a default on a Rest param, so no doing:
 
@@ -735,6 +735,40 @@ iterator.next(); //> 2
 iterator.next(); //> 3
 iterator.next(); //>
 console.log(iterator.next()); //>
+```
+
+## Async and Await
+
+```javascript
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x);
+    }, 2000);
+  });
+}
+
+function resolveAfter3Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x);
+    }, 3000);
+  });
+}
+
+async function add1(x) {
+  var a = resolveAfter2Seconds(20);
+  var b = resolveAfter3Seconds(30);
+  var aa = await a;
+  console.log('after aa');
+  var bb = await b;
+  console.log('after bb');
+  return x + aa + bb;
+}
+
+add1(10).then(v => {
+  console.log(v);  // prints 60 after 2 seconds.
+});
 ```
 
 ## Resources
